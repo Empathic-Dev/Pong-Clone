@@ -51,6 +51,14 @@
     canvasContext.fillRect(leftX, topY, width, height);
   }
 
+  function colorCircle(centerX, centerY, radius, drawColor) {
+    canvasContext.fillStyle = drawColor;
+    canvasContext.beginPath();
+      // first two arguments is the center of the ball, third argument is the radius, next two arguments are for the angles and radians around the circle, the last argument is for drawing the arc clockwise (false) or counterclockwise (true)
+    canvasContext.arc(centerX,centerY, radius, 0, Math.PI*2, true);
+    canvasContext.fill();
+  }
+
   function drawEverything(){
     console.log('I will finish this project!!!');
     console.log(ballX)
@@ -61,7 +69,7 @@
       // computer paddle
     colorRect(485,200,10,200, '#e6e7e8');
       // ball
-    colorRect(ballX,295,10,10, '#D5A001');
+    colorCircle(ballX, canvas.height/2, 6, '#D5A001')
     }
 
   function moveEverything(){
