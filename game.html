@@ -17,7 +17,7 @@
   <header><h1>Princess Shuri Builds Pong</h1></header>
 
   <main>
-
+    <canvas id="gameCanvas" width="500" height="580"></canvas>
   </main>
 
   <footer>
@@ -27,8 +27,28 @@
   </footer>
 
   <script>
+    var canvas; //dimensions of canvas display area
+    var canvesContext; //the graphical information of the canvas
+
   window.onload = function(){
-    console.log('I will finish this project!!!')
+    console.log('I will finish this project!!!');
+    canvas = document.getElementById('gameCanvas');
+    canvasContext = canvas.getContext('2d');
+      //canvas background
+    canvasContext.fillStyle = '#232D5E';
+    canvasContext.fillRect(0,0,canvas.width,canvas.height);
+
+    // player paddle
+    canvasContext.fillStyle = '#e6e7e8';
+    canvasContext.fillRect(5,200,10,200);
+
+      // computer paddle
+    canvasContext.fillStyle = '#e6e7e8';
+    canvasContext.fillRect(485,200,10,200);
+
+      // ball
+    canvasContext.fillStyle = '#D5A001';
+    canvasContext.fillRect(255,300,10,10);
   }
   </script>
   
