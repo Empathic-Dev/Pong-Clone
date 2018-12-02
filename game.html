@@ -8,6 +8,7 @@
 
   <link rel="stylesheet" href="game.css">
   <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono|IBM+Plex+Serif" rel="stylesheet">
+  <link rel="shortcut icon" href="pong-favicon.png" type="image/x-icon">
 
   <title>Code Your first Game | Pong |</title>
 
@@ -29,16 +30,28 @@
   <script>
     var canvas; //dimensions of canvas display area
     var canvesContext; //the graphical information of the canvas
+    var ballX = 255; // the x -axis coordinate of the ball
 
   window.onload = function(){
-    console.log('I will finish this project!!!');
     canvas = document.getElementById('gameCanvas');
     canvasContext = canvas.getContext('2d');
+
+    setInterval(drawEverything, 50); // calls the drawEverything function every second after the page is loaded
+
+    drawEverything();
+    drawEverything();
+    drawEverything();
+
+
+    function drawEverything(){
+    console.log('I will finish this project!!!');
+    console.log(ballX)
+
       //canvas background
     canvasContext.fillStyle = '#232D5E';
     canvasContext.fillRect(0,0,canvas.width,canvas.height);
 
-    // player paddle
+      // player paddle
     canvasContext.fillStyle = '#e6e7e8';
     canvasContext.fillRect(5,200,10,200);
 
@@ -48,7 +61,10 @@
 
       // ball
     canvasContext.fillStyle = '#D5A001';
-    canvasContext.fillRect(255,300,10,10);
+    canvasContext.fillRect(ballX,295,10,10);
+
+    ballX = ballX + 5;
+    }
   }
   </script>
   
