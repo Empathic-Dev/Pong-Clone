@@ -36,14 +36,16 @@
     canvas = document.getElementById('gameCanvas');
     canvasContext = canvas.getContext('2d');
 
-    setInterval(drawEverything, 50); // calls the drawEverything function every second after the page is loaded
+    var framesPerSecond = 30;
+    setInterval(function(){
+      drawEverything();
+      moveEverything();
+    }, 1000/framesPerSecond); // calls the drawEverything function every 30 frames in one second
 
     drawEverything();
-    drawEverything();
-    drawEverything();
+  }
 
-
-    function drawEverything(){
+  function drawEverything(){
     console.log('I will finish this project!!!');
     console.log(ballX)
 
@@ -62,10 +64,11 @@
       // ball
     canvasContext.fillStyle = '#D5A001';
     canvasContext.fillRect(ballX,295,10,10);
+    }
 
+  function moveEverything(){
     ballX = ballX + 5;
     }
-  }
   </script>
   
 </body>
