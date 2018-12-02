@@ -31,44 +31,48 @@
     var canvas; //dimensions of canvas display area
     var canvesContext; //the graphical information of the canvas
     var ballX = 255; // the x -axis coordinate of the ball
+    var ballSpeedX = 5; // speed of tha ball
 
   window.onload = function(){
     canvas = document.getElementById('gameCanvas');
     canvasContext = canvas.getContext('2d');
 
-    var framesPerSecond = 30;
+    var framesPerSecond = 60;
     setInterval(function(){
       drawEverything();
       moveEverything();
-    }, 1000/framesPerSecond); // calls the drawEverything function every 30 frames in one second
+    }, 1000/framesPerSecond); // calls the drawEverything function 60 times a second
 
     drawEverything();
+  }
+
+  function colorRect(leftX, topY, width, height, drawColor) {
+    canvasContext.fillStyle = drawColor;
+    canvasContext.fillRect(leftX, topY, width, height);
   }
 
   function drawEverything(){
     console.log('I will finish this project!!!');
     console.log(ballX)
-
       //canvas background
-    canvasContext.fillStyle = '#232D5E';
-    canvasContext.fillRect(0,0,canvas.width,canvas.height);
-
+    colorRect(0,0,canvas.width,canvas.height, '#232D5E');
       // player paddle
-    canvasContext.fillStyle = '#e6e7e8';
-    canvasContext.fillRect(5,200,10,200);
-
+    colorRect(5,200,10,200, '#e6e7e8');
       // computer paddle
-    canvasContext.fillStyle = '#e6e7e8';
-    canvasContext.fillRect(485,200,10,200);
-
+    colorRect(485,200,10,200, '#e6e7e8');
       // ball
-    canvasContext.fillStyle = '#D5A001';
-    canvasContext.fillRect(ballX,295,10,10);
+    colorRect(ballX,295,10,10, '#D5A001');
     }
 
   function moveEverything(){
-    ballX = ballX + 5;
+    ballX = ballX + ballSpeedX;
+    if (ballX > 470) {
+      ballSpeedX = -ballSpeedX;
     }
+    if (ballX < 20) {
+      ballSpeedX = -ballSpeedX;
+    }
+  }
   </script>
   
 </body>
