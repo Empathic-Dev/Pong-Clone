@@ -45,6 +45,7 @@
     setInterval(function(){
       drawEverything();
       moveEverything();
+      yearOfCompletion();
     }, 1000/framesPerSecond); // calls the drawEverything function 60 times a second
 
       // this function gets the evt with the mouses information, passing it into mousePos which retuns the x and y position of the mouse
@@ -53,6 +54,10 @@
                                 var mousePos = calculateMousePos(evt);
                                 paddle1Y = mousePos.y - (PADDLE_HEIGHT/2);
                               });
+  }
+
+  function yearOfCompletion() {
+    console.log('I will complete this project!')
   }
 
   function calculateMousePos(evt) {
@@ -106,7 +111,7 @@
     if (ballX < 30) {
       ballSpeedX = -ballSpeedX;
     }
-
+      // math check
     console.log('x-axis of the ball is ' + ballX);
     console.log('y-axis of the ball is ' + ballY);
   }
