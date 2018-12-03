@@ -18,7 +18,7 @@
   <header><h1>Princess Shuri Builds Pong</h1></header>
 
   <main>
-    <canvas id="gameCanvas" width="500" height="580"></canvas>
+    <canvas id="gameCanvas" width="500" height="500"></canvas>
   </main>
 
   <footer>
@@ -31,7 +31,11 @@
     var canvas; //dimensions of canvas display area
     var canvesContext; //the graphical information of the canvas
     var ballX = 255; // the x -axis coordinate of the ball
-    var ballSpeedX = 5; // speed of tha ball
+    var ballSpeedX = 5; // speed of tha ball on the x-axis
+    var ballY = 255; // the y-axis coordinate of the ball
+    var ballSpeedY = 4; // speed of tha ball on the y-axis
+    var paddle1Y = 175; // position of the players paddle on the y-axis
+    const PADDLE_HEIGHT = 150;
 
   window.onload = function(){
     canvas = document.getElementById('gameCanvas');
@@ -43,14 +47,31 @@
       moveEverything();
     }, 1000/framesPerSecond); // calls the drawEverything function 60 times a second
 
-    drawEverything();
+      // this function gets the evt with the mouses information, passing it into mousePos which retuns the x and y position of the mouse
+    canvas.addEventListener('mousemove',
+                              function(evt){
+                                var mousePos = calculateMousePos(evt);
+                                paddle1Y = mousePos.y - (PADDLE_HEIGHT/2);
+                              });
   }
 
+  function calculateMousePos(evt) {
+    var rect = canvas.getBoundingClientRect(); // the getBoundingClientRect method returns and stores the size of the canvas and its position relative to the viewport inside the rect variable
+    var root = document.documentElement; // the document.documentElement property returns and stores the html element inside the root variable
+    var mouseX = evt.clientX - rect.left - root.scrollLeft; // grabs the x-axis coordinate of the mouse on the canvas but not the html page
+    var mouseY = evt.clientY - rect.top - root.scrollTop; // grabs the y-axis coordinate of the mouse on the canvas but not the html page
+    return{
+      x:mouseX,
+      y:mouseY
+    };
+  }
+
+    // this function draws the paddles
   function colorRect(leftX, topY, width, height, drawColor) {
     canvasContext.fillStyle = drawColor;
     canvasContext.fillRect(leftX, topY, width, height);
   }
-
+    // this function draws the ball
   function colorCircle(centerX, centerY, radius, drawColor) {
     canvasContext.fillStyle = drawColor;
     canvasContext.beginPath();
@@ -60,26 +81,34 @@
   }
 
   function drawEverything(){
-    console.log('I will finish this project!!!');
-    console.log(ballX)
       //canvas background
-    colorRect(0,0,canvas.width,canvas.height, '#232D5E');
+    colorRect(0, 0, canvas.width, canvas.height, '#232D5E');
       // player paddle
-    colorRect(5,200,10,200, '#e6e7e8');
+    colorRect(5, paddle1Y, 10, PADDLE_HEIGHT, '#e6e7e8');
       // computer paddle
-    colorRect(485,200,10,200, '#e6e7e8');
+    colorRect(485, 175, 10, PADDLE_HEIGHT, '#e6e7e8');
       // ball
-    colorCircle(ballX, canvas.height/2, 6, '#D5A001')
+    colorCircle(ballX, ballY, 6, '#D5A001')
     }
 
   function moveEverything(){
     ballX = ballX + ballSpeedX;
+    ballY = ballY + ballSpeedY;
+    if (ballY > 500) {
+      ballSpeedY = -ballSpeedY;
+    } 
+    if (ballY < 0) {
+      ballSpeedY = -ballSpeedY;
+    }
     if (ballX > 470) {
       ballSpeedX = -ballSpeedX;
     }
-    if (ballX < 20) {
+    if (ballX < 30) {
       ballSpeedX = -ballSpeedX;
     }
+
+    console.log('x-axis of the ball is ' + ballX);
+    console.log('y-axis of the ball is ' + ballY);
   }
   </script>
   
