@@ -108,12 +108,19 @@
     if (ballX > 470) {
       ballSpeedX = -ballSpeedX;
     }
-    if (ballX < 30) {
-      ballSpeedX = -ballSpeedX;
+    if (ballX < 20) {
+      // ballSpeedX = -ballSpeedX;
+      ballReset()
+
     }
       // math check
     console.log('x-axis of the ball is ' + ballX);
     console.log('y-axis of the ball is ' + ballY);
+  }
+
+  function ballReset() {
+    ballX = canvas.width/2;
+    ballY = canvas.height/2;
   }
   </script>
   
