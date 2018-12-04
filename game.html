@@ -108,7 +108,13 @@
       ballSpeedY = -ballSpeedY;
     }
     if (ballX > 470) {
-      ballSpeedX = -ballSpeedX;
+      // ballSpeedX = -ballSpeedX;
+      if (ballY > paddle2Y &&
+          ballY < paddle2Y+PADDLE_HEIGHT) {
+            ballSpeedX = -ballSpeedX;
+      } else {
+        ballReset();
+      }
     }
     if (ballX < 25) {
       if (ballY > paddle1Y &&
