@@ -28,6 +28,10 @@
   </footer>
 
   <script>
+    function yearOfCompletion() {
+      console.log('I will complete this project!')
+    }
+
     var canvas; //dimensions of canvas display area
     var canvesContext; //the graphical information of the canvas
     var ballX = 255; // the x -axis coordinate of the ball
@@ -36,6 +40,8 @@
     var ballSpeedY = 4; // speed of tha ball on the y-axis
     var paddle1Y = 175; // position of the players paddle on the y-axis
     var paddle2Y = 175; // position of the computers paddle on the y-axis
+    var player1Score = 0;
+    var computerScore = 0;
     const PADDLE_HEIGHT = 150;
     const PADDLE_THICKNESS = 10;
 
@@ -45,9 +51,9 @@
 
     var framesPerSecond = 60;
     setInterval(function(){
+      yearOfCompletion();
       drawEverything();
       moveEverything();
-      yearOfCompletion();
     }, 1000/framesPerSecond); // calls the drawEverything function 60 times a second
 
       // this function gets the evt with the mouses information, passing it into mousePos which retuns the x and y position of the mouse
@@ -56,10 +62,6 @@
                                 var mousePos = calculateMousePos(evt);
                                 paddle1Y = mousePos.y - (PADDLE_HEIGHT/2);
                               });
-  }
-
-  function yearOfCompletion() {
-    console.log('I will complete this project!')
   }
 
   function calculateMousePos(evt) {
@@ -95,12 +97,25 @@
       // computer paddle
     colorRect(485, paddle2Y, PADDLE_THICKNESS, PADDLE_HEIGHT, '#e6e7e8');
       // ball
-    colorCircle(ballX, ballY, 6, '#D5A001')
+    colorCircle(ballX, ballY, 6, '#D5A001');
+
+    canvasContext.fillText(player1Score, 100,100);
+    canvasContext.fillText(computerScore, canvas.width-100,100);
     }
 
+    function computerMovement() {
+      var paddle2YCenter = paddle2Y + (PADDLE_HEIGHT/2);
+      if(paddle2YCenter < ballY-35){
+        paddle2Y += 6;
+      } else if(paddle2YCenter > ballY+35) {
+        paddle2Y -= 6;
+      }
+    }
   function moveEverything(){
-    ballX = ballX + ballSpeedX;
-    ballY = ballY + ballSpeedY;
+    computerMovement()
+
+    ballX += ballSpeedX;
+    ballY += ballSpeedY;
     if (ballY > 500) {
       ballSpeedY = -ballSpeedY;
     } 
@@ -114,6 +129,7 @@
             ballSpeedX = -ballSpeedX;
       } else {
         ballReset();
+        player1Score++;
       }
     }
     if (ballX < 25) {
@@ -122,6 +138,7 @@
             ballSpeedX = -ballSpeedX;
       } else {
         ballReset();
+        computerScore++;
       }
     }
       // math check
