@@ -94,26 +94,38 @@
 
     ballX += ballSpeedX; // moves the ball on the x-axis
     ballY += ballSpeedY; // moves the ball on the y-axis
+
+      // if the ball hits the bottom of the canvas, it will bounce off.
     if (ballY > 500) {
       ballSpeedY = -ballSpeedY;
     } 
+      // if the ball hits the top of the canvas, it will bounce off.
     if (ballY < 0) {
       ballSpeedY = -ballSpeedY;
     }
+      // when the ball hits the computer paddle it will bounce off. but if the player paddle misses, the ball will reset and the player gets a point
     if (ballX > 470) {
-      // ballSpeedX = -ballSpeedX;
       if (ballY > paddle2Y &&
           ballY < paddle2Y+PADDLE_HEIGHT) {
             ballSpeedX = -ballSpeedX;
+              // the next line gives a plus or minus value for how far the ball is below or above the center of the paddle
+            var deltaY = ballY - (paddle2Y+PADDLE_HEIGHT/2);
+              // ¯\_(ツ)_/¯
+            ballSpeedY = deltaY * 0.05;
       } else {
         ballReset();
         player1Score++;
       }
     }
+      // when the ball hits the player paddle it will bounce off. but if the computer paddle misses, the ball resets and the computer gets a point
     if (ballX < 25) {
       if (ballY > paddle1Y &&
           ballY < paddle1Y+PADDLE_HEIGHT) {
             ballSpeedX = -ballSpeedX;
+              // the next line gives a plus or minus value for how far the ball is below or above the center of the paddle
+            var deltaY = ballY - (paddle1Y+PADDLE_HEIGHT/2);
+              // ¯\_(ツ)_/¯
+            ballSpeedY = deltaY * 0.09;
       } else {
         ballReset();
         computerScore++;
@@ -143,6 +155,7 @@
   }
   function ballReset() {
     ballSpeedX = -ballSpeedX;
+      // next two lies position the ball in the middle of the canvas after it resets
     ballX = canvas.width/2;
     ballY = canvas.height/2;
   }
