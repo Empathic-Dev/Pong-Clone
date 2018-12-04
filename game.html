@@ -109,7 +109,6 @@
       ballSpeedX = -ballSpeedX;
     }
     if (ballX < 20) {
-      // ballSpeedX = -ballSpeedX;
       ballReset()
 
     }
@@ -119,6 +118,7 @@
   }
 
   function ballReset() {
+    ballSpeedX = -ballSpeedX;
     ballX = canvas.width/2;
     ballY = canvas.height/2;
   }
