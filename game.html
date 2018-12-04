@@ -111,7 +111,7 @@
               // the next line gives a plus or minus value for how far the ball is below or above the center of the paddle
             var deltaY = ballY - (paddle2Y+PADDLE_HEIGHT/2);
               // ¯\_(ツ)_/¯
-            ballSpeedY = deltaY * 0.05;
+            ballSpeedY = deltaY * 0.35;
       } else {
         ballReset();
         player1Score++;
@@ -125,7 +125,7 @@
               // the next line gives a plus or minus value for how far the ball is below or above the center of the paddle
             var deltaY = ballY - (paddle1Y+PADDLE_HEIGHT/2);
               // ¯\_(ツ)_/¯
-            ballSpeedY = deltaY * 0.09;
+            ballSpeedY = deltaY * 0.35;
       } else {
         ballReset();
         computerScore++;
@@ -138,9 +138,9 @@
     function computerMovement() {
       var paddle2YCenter = paddle2Y + (PADDLE_HEIGHT/2);
       if(paddle2YCenter < ballY-35){
-        paddle2Y += 4;
+        paddle2Y += 6;
       } else if(paddle2YCenter > ballY+35) {
-        paddle2Y -= 4;
+        paddle2Y -= 6;
       }
     }
   function calculateMousePos(evt) {
