@@ -35,7 +35,9 @@
     var ballY = 255; // the y-axis coordinate of the ball
     var ballSpeedY = 4; // speed of tha ball on the y-axis
     var paddle1Y = 175; // position of the players paddle on the y-axis
+    var paddle2Y = 175; // position of the computers paddle on the y-axis
     const PADDLE_HEIGHT = 150;
+    const PADDLE_THICKNESS = 10;
 
   window.onload = function(){
     canvas = document.getElementById('gameCanvas');
@@ -89,9 +91,9 @@
       //canvas background
     colorRect(0, 0, canvas.width, canvas.height, '#232D5E');
       // player paddle
-    colorRect(5, paddle1Y, 10, PADDLE_HEIGHT, '#e6e7e8');
+    colorRect(5, paddle1Y, PADDLE_THICKNESS, PADDLE_HEIGHT, '#e6e7e8');
       // computer paddle
-    colorRect(485, 175, 10, PADDLE_HEIGHT, '#e6e7e8');
+    colorRect(485, paddle2Y, PADDLE_THICKNESS, PADDLE_HEIGHT, '#e6e7e8');
       // ball
     colorCircle(ballX, ballY, 6, '#D5A001')
     }
@@ -108,9 +110,13 @@
     if (ballX > 470) {
       ballSpeedX = -ballSpeedX;
     }
-    if (ballX < 20) {
-      ballReset()
-
+    if (ballX < 25) {
+      if (ballY > paddle1Y &&
+          ballY < paddle1Y+PADDLE_HEIGHT) {
+            ballSpeedX = -ballSpeedX;
+      } else {
+        ballReset();
+      }
     }
       // math check
     console.log('x-axis of the ball is ' + ballX);
