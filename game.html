@@ -82,6 +82,12 @@
   function drawEverything(){
       //canvas background
     colorRect(0, 0, canvas.width, canvas.height, '#232D5E');
+      // this has to be before everything else because after return nothing else runs
+    if(showingWinScreen ){
+      canvasContext.fillStyle = '#D5A001';
+      canvasContext.fillText("click to continue", canvas.height/2, canvas.width/2);
+      return;
+    }
       // player paddle
     colorRect(5, paddle1Y, PADDLE_THICKNESS, PADDLE_HEIGHT, '#e6e7e8');
       // computer paddle
@@ -162,6 +168,7 @@
       computerScore >= WINNING_SCORE){
         player1Score = 0;
         computerScore = 0;
+        showingWinScreen = true;
     }
     ballSpeedX = -ballSpeedX;
       // next two lies position the ball in the middle of the canvas after it resets
