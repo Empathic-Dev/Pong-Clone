@@ -48,6 +48,14 @@
     const WINNING_SCORE = 3;
     var showingWinScreen = false;
 
+    function handleMouseClick(evt) {
+      if (showingWinScreen) {
+        player1Score = 0;
+        computerScore = 0;
+        showingWinScreen = false;
+      }
+    }
+
   window.onload = function(){
     canvas = document.getElementById('gameCanvas');
     canvasContext = canvas.getContext('2d');
@@ -58,6 +66,9 @@
       drawEverything();
       moveEverything();
     }, 1000/framesPerSecond); // calls the drawEverything function 60 times a second
+
+      // 
+      canvas.addEventListener('mousedown', handleMouseClick)
 
       // this function gets the evt with the mouses information, passing it into mousePos which retuns the x and y position of the mouse
     canvas.addEventListener('mousemove',
@@ -166,8 +177,6 @@
       // if either score is greater than or equal to the the WINNING_SCORE, reset poth scores. (|| = or)
     if(player1Score >= WINNING_SCORE ||
       computerScore >= WINNING_SCORE){
-        player1Score = 0;
-        computerScore = 0;
         showingWinScreen = true;
     }
     ballSpeedX = -ballSpeedX;
