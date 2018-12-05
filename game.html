@@ -29,7 +29,7 @@
 
   <script>
     function yearOfCompletion() {
-      console.log('I will complete this project!')
+      console.log('Project finished and error free!')
     }
 
     var canvas; //dimensions of canvas display area
@@ -120,6 +120,9 @@
     canvasContext.fillText(computerScore, canvas.width-100,100);
     }
   function moveEverything(){
+    if(showingWinScreen){
+      return;
+    }
     computerMovement();
 
     ballX += ballSpeedX; // moves the ball on the x-axis
