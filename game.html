@@ -40,10 +40,13 @@
     var ballSpeedY = 4; // speed of tha ball on the y-axis
     var paddle1Y = 175; // position of the players paddle on the y-axis
     var paddle2Y = 175; // position of the computers paddle on the y-axis
-    var player1Score = 0;
-    var computerScore = 0;
     const PADDLE_HEIGHT = 150;
     const PADDLE_THICKNESS = 10;
+
+    var player1Score = 0;
+    var computerScore = 0;
+    const WINNING_SCORE = 3;
+    var showingWinScreen = false;
 
   window.onload = function(){
     canvas = document.getElementById('gameCanvas');
@@ -113,8 +116,8 @@
               // ¯\_(ツ)_/¯
             ballSpeedY = deltaY * 0.35;
       } else {
+        player1Score++; // must be before ballReset()
         ballReset();
-        player1Score++;
       }
     }
       // when the ball hits the player paddle it will bounce off. but if the computer paddle misses, the ball resets and the computer gets a point
@@ -127,22 +130,22 @@
               // ¯\_(ツ)_/¯
             ballSpeedY = deltaY * 0.35;
       } else {
+        computerScore++; // must be before ballReset()
         ballReset();
-        computerScore++;
       }
     }
       // math check
     console.log('x-axis of the ball is ' + ballX);
     console.log('y-axis of the ball is ' + ballY);
   }
-    function computerMovement() {
-      var paddle2YCenter = paddle2Y + (PADDLE_HEIGHT/2);
-      if(paddle2YCenter < ballY-35){
-        paddle2Y += 6;
-      } else if(paddle2YCenter > ballY+35) {
-        paddle2Y -= 6;
-      }
+  function computerMovement() {
+    var paddle2YCenter = paddle2Y + (PADDLE_HEIGHT/2);
+    if(paddle2YCenter < ballY-35){
+      paddle2Y += 6;
+    } else if(paddle2YCenter > ballY+35) {
+      paddle2Y -= 6;
     }
+  }
   function calculateMousePos(evt) {
     var rect = canvas.getBoundingClientRect(); // the getBoundingClientRect method returns and stores the size of the canvas and its position relative to the viewport inside the rect variable
     var root = document.documentElement; // the document.documentElement property returns and stores the html element inside the root variable
@@ -154,6 +157,12 @@
     };
   }
   function ballReset() {
+      // if either score is greater than or equal to the the WINNING_SCORE, reset poth scores. (|| = or)
+    if(player1Score >= WINNING_SCORE ||
+      computerScore >= WINNING_SCORE){
+        player1Score = 0;
+        computerScore = 0;
+    }
     ballSpeedX = -ballSpeedX;
       // next two lies position the ball in the middle of the canvas after it resets
     ballX = canvas.width/2;
